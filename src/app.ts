@@ -11,7 +11,7 @@ app.command("/birthday-channel", async ({ command, ack, respond }) => {
   await ack();
   let [uid, group] = <[tag: string, group: string]>command.text.split(" ");
   group = group.split("^")[1].split("|")[0];
-  console.log(group);
+  console.log(`channel-creation: creating channel ${command.text}`);
   let res = await app.client.usergroups.users.list({
     token: config.slackBotToken,
     usergroup: group,
@@ -27,18 +27,16 @@ app.command("/birthday-channel", async ({ command, ack, respond }) => {
 
   let channel = await app.client.conversations.create({
     token: config.slackBotToken,
-    name: `${tag.user.name}-${Math.round(
-      Math.random() * 1000
-    ).toString()}-cakeday`,
+    name: `${tag.user.name}-cakeday-${new Date().getFullYear()}`,
     is_private: true,
   });
-
+  console.log(`channel-creation: channel created ${channel.channel.id}`);
   await app.client.conversations.invite({
     token: config.slackBotToken,
     users: people.join(","),
     channel: channel.channel.id,
   });
-
+  console.log(`channel-creation: invited ${people.join(",")}`);
   await respond(`Created channel <#${channel.channel.id}>!`);
 });
 
