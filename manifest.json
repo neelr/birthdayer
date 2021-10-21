@@ -1,0 +1,36 @@
+{
+  "_metadata": {
+    "major_version": 1,
+    "minor_version": 1
+  },
+  "display_information": {
+    "name": "BirthdayBot",
+    "description": "Birthdaybot! It helps you create your private channels, and hopefully will evolve to make birthday messages in lounge!",
+    "background_color": "#7ed5ff"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "mooshoo",
+      "always_online": true
+    },
+    "slash_commands": [
+      {
+        "command": "/birthday-channel",
+        "url": "https://3902-2600-1702-44f0-c9b0-7c6b-6351-4928-6ade.ngrok.io/slack/events",
+        "description": "Creates a new birthday channel! Include the birthday person, and the user group to add (we'll exclude the birthday person!)",
+        "usage_hint": "/birthday-channel [user] [usergroup]",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": ["commands", "chat:write", "chat:write.public", "usergroups:read"]
+    }
+  },
+  "settings": {
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
+}
